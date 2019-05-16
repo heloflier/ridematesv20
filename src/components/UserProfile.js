@@ -58,6 +58,7 @@ class UserProfile extends Component {
                                 value={this.state.firstname}
                                 placeholder="First Name"
                                 margin="normal"
+                                onChange={this.handleChange(e)}
                             />
                         </div>
                     </form>
