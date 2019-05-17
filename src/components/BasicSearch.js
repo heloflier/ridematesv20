@@ -8,61 +8,60 @@ class BasicSearch extends Component {
         difficulty: "",
     };
 
-    submitChange = (event, location, biketype, difficulty) => {
-        event.preventDefault();
+    onFormSubmit(e) {
+        console.log('basic search on form submit')
+        e.preventDefault();
+        let type =
 
-        // console.log("in signup submitchange");
-        const searchObj = this.state;
+            this.setState({ [name]: value });
 
-        if (this.state.biketype === "Road Bike") {
-            searchObj.biketype = "rideTypeRoad"
-        }
-        else if (this.state.biketype === "Mountain Bike") {
-            searchObj.biketype = "rideTypeMountain"
-        }
-        else if (this.state.biketype === "Hybrid") {
-            searchObj.biketype = "rideTypeOther"
-        };
+        console.log('state: ', this.state)
+    }
 
-        if (this.state.difficulty === "Easy (15 - 25 miles)") {
-            searchObj.difficulty = "difficultyEasy"
-        }
-        else if (this.state.difficulty === "Intermediate (25 - 45 miles)") {
-            searchObj.difficulty = "difficultyIntermediate"
-        }
-        else if (this.state.difficulty === "Hard (Above 50 miles)") {
-            searchObj.difficulty = "difficultyHard"
-        };
-
-        this.setState({
-            where: "San Diego, CA",
-            biketype: "",
-            difficulty: ""
-        });
-    };
-
-    onChange = name => event => {
+    onChange = event => {
+        let value = event.target.value
+        let name = event.target.name
         console.log('on change name: ', name)
-        console.log('on change e: ', event.target.value)
-        this.setState({ [name]: event.target.value });
+        console.log('on change value: ', value)
+        this.setState({ [name]: value });
     };
 
     render() {
         return (
             <div>
-                Where would you like to ride?
-                <input
-                    type='text'
-                    placeholder='city, zipcode, etc.'
-                    name='location'
-                    onChange={e => this.onChange(e)}
-                >
-                </input>
-                <select>
-                    <option value='ciao'>ciao</option>
-                    <option value='bob'>bob</option>
-                </select>
-
+                <h2>Where would you like to ride?</h2>
+                <div>
+                    <input
+                        type='text'
+                        placeholder='city, zipcode, etc.'
+                        name='location'
+                        onChange={e => this.onChange(e)}
+                    >
+                    </input>
+                </div>
+                <div>
+                    <label>Ride Type:</label>
+                    <select
+                        name='type'
+                        value={this.state.value}
+                        onChange={this.handleChange}
+                    >
+                        <option value='road'>Road Bike</option>
+                        <option value='mountain'>Mountain Bike</option>
+                        <option value='other'>Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Ride Difficulty:</label>
+                    <select name='difficulty'>
+                        <option value='easy'>Easy</option>
+                        <option value='medium'>Medium</option>
+                        <option value='hard'>Hard</option>
+                    </select>
+                </div>
+                <button onClick={e => this.onFormSubmit(e)}>
+                    Find Your Mates!
+                </button>
             </div>
         );
     }
