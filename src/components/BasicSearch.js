@@ -4,23 +4,23 @@ class BasicSearch extends Component {
 
     state = {
         location: "",
-        biketype: "",
-        difficulty: "",
+        type: "road",
+        difficulty: "easy",
     };
 
-    onFormSubmit(e) {
+    onSubmit = e => {
         console.log('basic search on form submit')
         e.preventDefault();
-        let type =
+        // let type =
 
-            this.setState({ [name]: value });
+        //     this.setState({ [name]: value });
 
         console.log('state: ', this.state)
     }
 
-    onChange = event => {
-        let value = event.target.value
-        let name = event.target.name
+    onChange = e => {
+        let value = e.target.value
+        let name = e.target.name
         console.log('on change name: ', name)
         console.log('on change value: ', value)
         this.setState({ [name]: value });
@@ -29,39 +29,45 @@ class BasicSearch extends Component {
     render() {
         return (
             <div>
-                <h2>Where would you like to ride?</h2>
-                <div>
-                    <input
-                        type='text'
-                        placeholder='city, zipcode, etc.'
-                        name='location'
-                        onChange={e => this.onChange(e)}
-                    >
-                    </input>
-                </div>
-                <div>
-                    <label>Ride Type:</label>
-                    <select
-                        name='type'
-                        value={this.state.value}
-                        onChange={this.handleChange}
-                    >
-                        <option value='road'>Road Bike</option>
-                        <option value='mountain'>Mountain Bike</option>
-                        <option value='other'>Other</option>
-                    </select>
-                </div>
-                <div>
-                    <label>Ride Difficulty:</label>
-                    <select name='difficulty'>
-                        <option value='easy'>Easy</option>
-                        <option value='medium'>Medium</option>
-                        <option value='hard'>Hard</option>
-                    </select>
-                </div>
-                <button onClick={e => this.onFormSubmit(e)}>
-                    Find Your Mates!
-                </button>
+                <form onSubmit={this.onSubmit}>
+                    <h2>Where would you like to ride?</h2>
+                    <div>
+                        <input
+                            type='text'
+                            placeholder='city, zipcode, etc.'
+                            name='location'
+                            onChange={this.onChange}
+                        >
+                        </input>
+                    </div>
+                    <div>
+                        <label>Ride Type:</label>
+                        <select 
+                            name='type'
+                            value={this.state.value}
+                            onChange={this.onChange}
+                        >
+                            <option value='road'>Road Bike</option>
+                            <option value='mountain'>Mountain Bike</option>
+                            <option value='other'>Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Ride Difficulty:</label>
+                        <select
+                            name='difficulty'
+                            value={this.state.value}
+                            onChange={this.onChange}
+                        >
+                            <option defaultValue value='easy'>Easy</option>
+                            <option value='medium'>Medium</option>
+                            <option value='hard'>Hard</option>
+                        </select>
+                    </div>
+                    <button>
+                        Find Your Mates!
+                    </button>
+                </form>
             </div>
         );
     }
