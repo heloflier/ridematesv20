@@ -21,3 +21,6 @@ function App() {
 }
 
 export default App;
+
+
+// TODO: add actions and types from streams
